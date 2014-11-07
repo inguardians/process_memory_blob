@@ -3,7 +3,7 @@ process_memory_blob
 
 Tools to process memory blobs extracted from embedded device memory components.
 
-# process_mem_blob.py: 
+## process_mem_blob.py: 
 Processes a file and locates sections that contain data. This is to help analysts pinpoint sections of a memory blob rather than just scrolling through the whole thing looking for values that are not 0x00 or 0xff.
 
 ```
@@ -33,10 +33,10 @@ using a better memory processor.
 
 ```
 
-# process_mem_blob_chunks.py: 
+## process_mem_blob_chunks.py: 
 Processes a file and extracts "extra" data when dumping tools pull (for example) 264 bytes rather than 256 bytes per block. This extra data may be used by the memory component for error correction or other functionality. But, if it is present in the memory blob then it needs to be removed.
 
-# process_mem_blog_keys.py
+## process_mem_blog_keys.py
 Processes a file looking for keys of a specific length. This is done by testing for entropy specific to the key size. The user has the option to purge consecutive positive hits that could indicate larger keys or just sections of data with entropy matching that key size (such as firmware).
 
 ```
@@ -53,13 +53,13 @@ All data is printed to standard out.
 
 ```
 
-# progressBar.py
+## progressBar.py
 Displays how much of the file has been processed as it is being processed. Borrowed from cyphunk:
 
 - http://deadhacker.com/2007/05/13/finding-entropy-in-binary-files/
 - https://github.com/cyphunk/sectk/tree/master/often/entropy_analysis
 
 
-InGuardians, Inc.<br>
-http://www.inguardians.com<br>
-http://labs.inguardians.com<br>
+## InGuardians, Inc.<br>
+- http://www.inguardians.com<br>
+- http://labs.inguardians.com<br>
