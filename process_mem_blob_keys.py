@@ -35,6 +35,7 @@
 ############################################
 import os,sys
 import math
+from progressBar import *
 
 
 # I picked these values after looking at the 
@@ -99,11 +100,22 @@ def purge_results(offsets):
 # Search each byte of data and the test the entropy for the key_len
 def process_data(data,key_len):
     offsets = []
+    pb = 0
     for e in range(len(data)):
+
         # Don't look behind
         if e == 0:
             print "\nStarting. Processing byte-by-byte of %d bytes. Please be patient."%len(data)
             #continue
+
+        # If redirecting into a file we might not want to show progress
+        if SHOW:
+            # Use progress bar to help user
+            blocks = len(data)/key_len
+            pb += 1
+            progress = progressBar(0, len(data) - key_len, 77)
+            progress(pb)
+
         # Don't go past the end
         #if (e + key_len + 1) >= len(data):
         #print "keylen",key_len," : data",len(data)
@@ -123,6 +135,8 @@ def usage():
     print sys.argv[0] + ' [-h] [-d] [-k int] [-f <binary file>]'
     print "    -h: This is it."
     print "    -d: Turn on debugging.  Default: off"
+    print "    -p: Turn on purging to filter consecutive items. This could generate false negatives.  Default: off"
+    print "    -s: Turn off progress bar. This is useful when redirecting to a file.  Default: on"
     print "    -k <int>: number of bytes in key"
     print "    -f <binary file>: binary file that contains the data."
     print ""
@@ -139,6 +153,7 @@ if __name__ == "__main__":
     # Default to 16 byte key length
     KEY_LEN = 16
     PURGE   = False
+    SHOW    = True
 
     while len(sys.argv) > 1:
         op = sys.argv.pop(1)
@@ -148,6 +163,8 @@ if __name__ == "__main__":
             DEBUG = True
         if op == '-p':
             PURGE = True
+        if op == '-s':
+            SHOW = False
         if op == '-f':
             INF = sys.argv.pop(1)
         if op == '-k':
