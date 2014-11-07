@@ -100,7 +100,11 @@ def purge_results(offsets):
 # Search each byte of data and the test the entropy for the key_len
 def process_data(data,key_len):
     offsets = []
-    pb = 0
+    # If redirecting into a file we might not want to show progress
+    if SHOW:
+        pb = 0
+        blocks = len(data)/key_len
+        progress = progressBar(0, len(data) - key_len, 77)
     for e in range(len(data)):
 
         # Don't look behind
@@ -109,11 +113,9 @@ def process_data(data,key_len):
             #continue
 
         # If redirecting into a file we might not want to show progress
-        if SHOW:
+        if SHOW and (progress.amount < (len(data) - key_len)):
             # Use progress bar to help user
-            blocks = len(data)/key_len
             pb += 1
-            progress = progressBar(0, len(data) - key_len, 77)
             progress(pb)
 
         # Don't go past the end
