@@ -6,7 +6,7 @@ Tools to process memory blobs extracted from embedded device memory components.
 # process_mem_blob.py: 
 Processes a file and locates sections that contain data. This is to help analysts pinpoint sections of a memory blob rather than just scrolling through the whole thing looking for values that are not 0x00 or 0xff.
 
-'''
+```
 user> python process_memory_blob.py -h
 process_memory_blob.py [-h] [-d] [-n int] [-l int] [-s int] [-m] [-M list] [-e] [-z] [-f <binary file>]
     -h: This is it.
@@ -31,7 +31,7 @@ file might slow your system down due to memory usage (for the large object) and 
 usage for printing to the screen.  You can fix this by rewriting this in C or by
 using a better memory processor.
 
-'''
+```
 
 # process_mem_blob_chunks.py: 
 Processes a file and extracts "extra" data when dumping tools pull (for example) 264 bytes rather than 256 bytes per block. This extra data may be used by the memory component for error correction or other functionality. But, if it is present in the memory blob then it needs to be removed.
@@ -39,7 +39,7 @@ Processes a file and extracts "extra" data when dumping tools pull (for example)
 # process_mem_blog_keys.py
 Processes a file looking for keys of a specific length. This is done by testing for entropy specific to the key size. The user has the option to purge consecutive positive hits that could indicate larger keys or just sections of data with entropy matching that key size (such as firmware).
 
-'''
+```
 user> python process_mem_blob_keys.py -h
 process_mem_blob_keys.py [-h] [-d] [-k int] [-f <binary file>]
     -h: This is it.
@@ -51,7 +51,7 @@ process_mem_blob_keys.py [-h] [-d] [-k int] [-f <binary file>]
 
 All data is printed to standard out.
 
-'''
+```
 
 # progressBar.py
 Displays how much of the file has been processed as it is being processed. Borrowed from cyphunk:
